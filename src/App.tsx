@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
-import Table from "./Table";
+import Table from "./components/Table";
 
 const url =
   "https://script.google.com/macros/s/AKfycbyrQsDNziAEy7ea0dyXaLlSrwcMKr-T1LYm4qXGaSYhwWosJa5h3-ZGvdqEcXlmSOJm/exec";
@@ -51,7 +51,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-yellow-100">
+      <div className="h-screen w-screen bg-[#F3F4F6] flex items-center justify-center">
         {loading ? <p>載入中...</p> : <Table people={people} />}
       </div>
     </>
