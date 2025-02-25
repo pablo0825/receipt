@@ -48,20 +48,98 @@ const PdfBtn = ({ idx, people }: PdfBtnPerson) => {
 
       const peopleData = people[id];
 
+      /* name */
       page.drawText(`${peopleData.Name}`, {
-        x: 80,
-        y: 680,
-        size: 14,
-        font: customFont,
-        color: rgb(0, 0, 0),
-      });
-
-      page.drawText(`${peopleData.Unit}`, {
-        x: 230,
+        x: 85,
         y: 670,
         size: 12,
         font: customFont,
         color: rgb(0, 0, 0),
+      });
+
+      /* unit */
+      const unitLines_unit = wrapText(peopleData.Unit, 11);
+
+      if (unitLines_unit.length < 11) {
+        unitLines_unit.forEach((line, index) => {
+          page.drawText(line, {
+            x: 248,
+            y: 678 - index * 15,
+            size: 12,
+            font: customFont,
+            color: rgb(0, 0, 0),
+          });
+        });
+      } else {
+        unitLines_unit.forEach((line) => {
+          page.drawText(line, {
+            x: 248,
+            y: 670,
+            size: 12,
+            font: customFont,
+            color: rgb(0, 0, 0),
+          });
+        });
+      }
+
+      /* 職稱 */
+      page.drawText(`${peopleData.JT}`, {
+        x: 458,
+        y: 670,
+        size: 12,
+        font: customFont,
+        color: rgb(0, 0, 0),
+      });
+
+      /* 身分證字號 */
+      const unitSpacing_IN = spacingText(peopleData.IN);
+
+      unitSpacing_IN.forEach((line, idx) => {
+        page.drawText(line, {
+          x: 90 + idx * 28,
+          y: 428,
+          size: 12,
+          font: customFont,
+          color: rgb(0, 0, 0),
+        });
+      });
+
+      /* 銀行名稱 */
+      const unitLines_BN = wrapText(peopleData.BN, 5);
+
+      if (unitLines_BN.length < 5) {
+        unitLines_BN.forEach((line, index) => {
+          page.drawText(line, {
+            x: 172,
+            y: 360 - index * 15,
+            size: 12,
+            font: customFont,
+            color: rgb(0, 0, 0),
+          });
+        });
+      } else {
+        unitLines_BN.forEach((line) => {
+          page.drawText(line, {
+            x: 172, // 固定 X 座標
+            y: 352,
+            size: 12,
+            font: customFont,
+            color: rgb(0, 0, 0),
+          });
+        });
+      }
+
+      /* 銀行帳號 */
+      const unitSpacing_BRN = spacingText(String(peopleData.BRN));
+
+      unitSpacing_BRN.forEach((line, idx) => {
+        page.drawText(line, {
+          x: 260 + idx * 20,
+          y: 354,
+          size: 10,
+          font: customFont,
+          color: rgb(0, 0, 0),
+        });
       });
 
       const pdfBytes = await pdfDoc.save();
@@ -84,6 +162,26 @@ const PdfBtn = ({ idx, people }: PdfBtnPerson) => {
       PDF
     </button>
   );
+};
+
+const wrapText = (text: string, maxLength: number) => {
+  const cleanedText = text.replace(/[-\s]/g, "");
+
+  const lines = [];
+  for (let i = 0; i < cleanedText.length; i += maxLength) {
+    lines.push(cleanedText.slice(i, i + maxLength));
+  }
+  return lines;
+};
+
+const spacingText = (text: string) => {
+  const cleanedText = text.replace(/[-\s]/g, "");
+
+  const lines = [];
+  for (let i = 0; i < cleanedText.length; i++) {
+    lines.push(cleanedText.slice(i, i + 1));
+  }
+  return lines;
 };
 
 export default PdfBtn;

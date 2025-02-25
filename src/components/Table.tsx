@@ -1,7 +1,7 @@
 /* Table.tsx */
 import React from "react";
-import Btn from "./Btn";
-import PreviewBtn from "./PreviewBtn";
+import WordBtn from "./WordBtn";
+/* import PreviewBtn from "./PreviewBtn"; */
 import PdfBtn from "./PdfBtn";
 
 interface TableDats {
@@ -32,7 +32,7 @@ const Table = ({ people }: TaDatPerson) => {
             <th className="px-6 py-3">銀行名稱</th>
             <th className="px-6 py-3">銀行代碼</th>
             <th className="px-6 py-3">銀行帳號</th>
-            <th className="px-6 py-3">預覽/下載領據</th>
+            <th className="px-6 py-3">下載領據</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200">
@@ -49,8 +49,8 @@ const Table = ({ people }: TaDatPerson) => {
                   <td className="px-6 py-4">{pve.BRN}</td>
                   <td className="px-6 py-4">
                     <div className="flex flex-row space-x-2">
-                      <PreviewBtn />
-                      <Btn idx={idx} people={people} />
+                      {/* <PreviewBtn /> */}
+                      <WordBtn idx={idx} people={people} />
                       <PdfBtn idx={idx} people={people} />
                     </div>
                   </td>
@@ -58,7 +58,7 @@ const Table = ({ people }: TaDatPerson) => {
               );
             })
           ) : (
-            <tr>
+            <tr className="flex justify-center p-2">
               <td>沒有資料</td>
             </tr>
           )}
