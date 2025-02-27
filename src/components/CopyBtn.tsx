@@ -13,10 +13,9 @@ const CopyBtn = ({ text }: CopyBtnProps) => {
     try {
       await navigator.clipboard.writeText(text);
       setCopySuccess((pre) => ({ ...pre, [text]: true }));
-      alert("複製成功");
       setTimeout(() => {
         setCopySuccess((prev) => ({ ...prev, [text]: false }));
-      }, 1300);
+      }, 1500);
     } catch (error) {
       console.error("複製失敗", error);
     }
@@ -25,12 +24,12 @@ const CopyBtn = ({ text }: CopyBtnProps) => {
   return (
     <button
       onClick={() => handleCopy(text)}
-      className="p-2 bg-[#F9FAFB] rounded-lg group"
+      className="p-2 hover:bg-[#F9FAFB] rounded-lg group"
     >
       {copySuccess[text] ? (
         <LuCopyCheck className="text-emerald-500" />
       ) : (
-        <LuCopy className="group-hover:text-emerald-500" />
+        <LuCopy className=" group-hover:text-emerald-500" />
       )}
     </button>
   );
