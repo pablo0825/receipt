@@ -1,8 +1,7 @@
 /* Table.tsx */
-import React from "react";
 import WordBtn from "./WordBtn";
-/* import PreviewBtn from "./PreviewBtn"; */
 import PdfBtn from "./PdfBtn";
+import CopyBtn from "./CopyBtn";
 
 interface TableDats {
   ID: string;
@@ -26,7 +25,7 @@ const Table = ({ people }: TaDatPerson) => {
         <thead className=" bg-[#F9FAFB]">
           <tr className="border-b-[1px] text-center">
             <th className="px-6 py-3">姓名</th>
-            <th className="px-6 py-3">單位</th>
+            <th className="w-56 px-6 py-3">單位</th>
             <th className="px-6 py-3">職稱</th>
             <th className="px-6 py-3">身分證字號</th>
             <th className="px-6 py-3">銀行名稱</th>
@@ -40,13 +39,25 @@ const Table = ({ people }: TaDatPerson) => {
             people.map((pve, idx) => {
               return (
                 <tr key={pve.ID} className="hover:bg-gray-100 text-center">
-                  <td className="px-6 py-4">{pve.Name}</td>
-                  <td className="px-6 py-4">{pve.Unit}</td>
+                  <td className="px-6 py-4 space-y-1">
+                    <p>{pve.Name}</p>
+                    <CopyBtn text={pve.Name ?? ""} />
+                  </td>
+                  <td className="px-6 py-4 space-y-1">
+                    <p>{pve.Unit}</p>
+                    <CopyBtn text={pve.Unit ?? ""} />
+                  </td>
                   <td className="px-6 py-4">{pve.JT}</td>
-                  <td className="px-6 py-4">{pve.IN}</td>
+                  <td className="px-6 py-4 space-y-1">
+                    <p>{pve.IN}</p>
+                    <CopyBtn text={pve.IN ?? ""} />
+                  </td>
                   <td className="px-6 py-4">{pve.BN}</td>
                   <td className="px-6 py-4">{pve.BC}</td>
-                  <td className="px-6 py-4">{pve.BRN}</td>
+                  <td className="px-6 py-4 space-y-1">
+                    <p>{pve.BRN}</p>
+                    <CopyBtn text={pve.BRN ?? ""} />
+                  </td>
                   <td className="px-6 py-4">
                     <div className="flex flex-row space-x-2">
                       {/* <PreviewBtn /> */}
@@ -58,8 +69,10 @@ const Table = ({ people }: TaDatPerson) => {
               );
             })
           ) : (
-            <tr className="flex justify-center p-2">
-              <td>沒有資料</td>
+            <tr className="text-center p-2">
+              <td colSpan={8} className="py-2">
+                沒有資料
+              </td>
             </tr>
           )}
         </tbody>

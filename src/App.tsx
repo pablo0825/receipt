@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import Table from "./components/Table";
+import APIInput from "./components/APIInput";
 
 interface peopleDats {
   ID: string;
@@ -45,44 +46,22 @@ function App() {
     }
   };
 
-  const isValidUrl = (url: string) => {
-    const regex = /^(https?:\/\/)[^\s$.?#].[^\s]*$/gm;
-    return regex.test(url);
-  };
-
-  const handleFetch = () => {
-    setError(null);
-    if (!isValidUrl(apiUrl)) {
-      setError("請輸入有效的 API URL");
-      return;
-    }
-    fetchData(apiUrl);
-    setApiUrl("");
-  };
-
   return (
     <>
       <div className="h-screen w-screen bg-[#F3F4F6]">
         <div className="flex flex-col max-w-[90rem] mx-auto">
           {/* input */}
-          <div className="flex-none space-x-4 mt-12 px-4">
-            <input
-              type="text"
-              placeholder="請輸入 API URL"
-              value={apiUrl}
-              onChange={(e) => setApiUrl(e.target.value)}
-              className="p-2 rounded border border-gray-300 w-80"
+          <div className="flex-none mt-12 px-4">
+            <APIInput
+              setError={setError}
+              fetchData={fetchData}
+              setApiUrl={setApiUrl}
+              apiUrl={apiUrl}
             />
-            <button
-              onClick={handleFetch}
-              className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition transform hover:scale-105 active:scale-95"
-            >
-              載入資料
-            </button>
           </div>
           {/* error */}
           <div className="">
-            {error && <p className="text-red-500">{error}</p>}
+            {error && <p className="px-4 pt-2 pb-2 text-red-500">{error}</p>}
           </div>
           {/* tablo */}
           <div className="flex-1 items-center justify-center">
