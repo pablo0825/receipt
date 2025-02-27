@@ -26,7 +26,7 @@ const PdfBtn = ({ idx, people }: PdfBtnPerson) => {
     }
 
     try {
-      const response = await fetch("/template.pdf");
+      const response = await fetch(`${import.meta.env.BASE_URL}template.pdf`);
       if (!response.ok) throw new Error("無法載入 PDF 模板");
 
       const templateArrayBuffer = await response.arrayBuffer();
@@ -36,7 +36,9 @@ const PdfBtn = ({ idx, people }: PdfBtnPerson) => {
       pdfDoc.registerFontkit(fontkit);
 
       // 讀取支援中文的字型
-      const fontResponse = await fetch("/fonts/NotoSansCJK-Regular.ttf");
+      const fontResponse = await fetch(
+        `${import.meta.env.BASE_URL}/fonts/NotoSansCJK-Regular.ttf`
+      );
       if (!fontResponse.ok) throw new Error("無法載入中文字型");
 
       const fontArrayBuffer = await fontResponse.arrayBuffer();

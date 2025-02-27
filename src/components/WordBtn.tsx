@@ -26,8 +26,9 @@ const WordBtn = ({ idx, people }: BtnPerson) => {
     }
 
     try {
-      const response = await fetch("/template.docx");
-      if (!response.ok) throw new Error("無法載入 Word 模板");
+      const response = await fetch(`${import.meta.env.BASE_URL}template.docx`);
+      if (!response.ok)
+        throw new Error(`載入失敗: ${response.status} ${response.statusText}`);
 
       const templateArrayBuffer = await response.arrayBuffer();
       const zip = new PizZip(templateArrayBuffer);
