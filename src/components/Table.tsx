@@ -16,9 +16,10 @@ interface TableDats {
 
 interface TaDatPerson {
   people: TableDats[];
+  botCenter: () => void;
 }
 
-const Table = ({ people }: TaDatPerson) => {
+const Table = ({ people, botCenter }: TaDatPerson) => {
   return (
     <div className="overscroll-x-auto p-4">
       <table className="min-w-full bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -41,22 +42,22 @@ const Table = ({ people }: TaDatPerson) => {
                 <tr key={pve.ID} className="hover:bg-gray-100 text-center">
                   <td className="px-6 py-4 space-y-1">
                     <p>{pve.Name}</p>
-                    <CopyBtn text={pve.Name ?? ""} />
+                    <CopyBtn text={pve.Name ?? ""} botCenter={botCenter} />
                   </td>
                   <td className="px-6 py-4 space-y-1">
                     <p>{pve.Unit}</p>
-                    <CopyBtn text={pve.Unit ?? ""} />
+                    <CopyBtn text={pve.Unit ?? ""} botCenter={botCenter} />
                   </td>
                   <td className="px-6 py-4">{pve.JT}</td>
                   <td className="px-6 py-4 space-y-1">
                     <p>{pve.IN}</p>
-                    <CopyBtn text={pve.IN ?? ""} />
+                    <CopyBtn text={pve.IN ?? ""} botCenter={botCenter} />
                   </td>
                   <td className="px-6 py-4">{pve.BN}</td>
                   <td className="px-6 py-4">{pve.BC}</td>
                   <td className="px-6 py-4 space-y-1">
                     <p>{pve.BRN}</p>
-                    <CopyBtn text={pve.BRN ?? ""} />
+                    <CopyBtn text={pve.BRN ?? ""} botCenter={botCenter} />
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex flex-row space-x-2">

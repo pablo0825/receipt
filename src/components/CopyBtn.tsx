@@ -4,9 +4,10 @@ import { LuCopyCheck } from "react-icons/lu";
 
 interface CopyBtnProps {
   text: string;
+  botCenter: () => void;
 }
 
-const CopyBtn = ({ text }: CopyBtnProps) => {
+const CopyBtn = ({ text, botCenter }: CopyBtnProps) => {
   const [copySuccess, setCopySuccess] = useState<Record<string, boolean>>({});
 
   const handleCopy = async (text: string) => {
@@ -23,7 +24,10 @@ const CopyBtn = ({ text }: CopyBtnProps) => {
 
   return (
     <button
-      onClick={() => handleCopy(text)}
+      onClick={() => {
+        handleCopy(text);
+        botCenter();
+      }}
       className="p-2 hover:bg-[#F9FAFB] rounded-lg group"
     >
       {copySuccess[text] ? (

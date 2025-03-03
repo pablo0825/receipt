@@ -4,6 +4,7 @@ import axios from "axios";
 import "./App.css";
 import Table from "./components/Table";
 import APIInput from "./components/APIInput";
+import { ToastContainer, toast } from "react-toastify";
 
 interface peopleDats {
   ID: string;
@@ -46,6 +47,12 @@ function App() {
     }
   };
 
+  const botCenter = () => {
+    toast.success("複製成功 🎉", {
+      position: "bottom-center",
+    });
+  };
+
   return (
     <>
       <div className="h-screen w-screen bg-[#F3F4F6]">
@@ -68,10 +75,11 @@ function App() {
             {loading ? (
               <p className="p-4">載入中...</p>
             ) : (
-              <Table people={people} />
+              <Table people={people} botCenter={botCenter} />
             )}
           </div>
         </div>
+        <ToastContainer />
       </div>
     </>
   );
