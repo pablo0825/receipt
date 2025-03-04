@@ -11,6 +11,7 @@ interface PdfBtnDats {
   BN: string;
   BC: string;
   BRN: string;
+  Email: string;
 }
 
 interface PdfBtnPerson {
@@ -43,6 +44,17 @@ const PdfBtn = ({ idx, people }: PdfBtnPerson) => {
 
       const fontArrayBuffer = await fontResponse.arrayBuffer();
       const customFont = await pdfDoc.embedFont(fontArrayBuffer);
+
+      // 讀取支援英文的字型
+      const EnglishFontResponse = await fetch(
+        `${import.meta.env.BASE_URL}/fonts/TimesNewRoman.ttf`
+      );
+      if (!EnglishFontResponse.ok) throw new Error("無法載入中文字型");
+
+      const fontArrayBuffer_English = await EnglishFontResponse.arrayBuffer();
+      const customFont_English = await pdfDoc.embedFont(
+        fontArrayBuffer_English
+      );
 
       // 取得第一頁
       const page = pdfDoc.getPages()[0];
@@ -89,6 +101,15 @@ const PdfBtn = ({ idx, people }: PdfBtnPerson) => {
         y: 670,
         size: 12,
         font: customFont,
+        color: rgb(0, 0, 0),
+      });
+
+      /* Email */
+      page.drawText(`${peopleData.Email}`, {
+        x: 422,
+        y: 428,
+        size: 12,
+        font: customFont_English,
         color: rgb(0, 0, 0),
       });
 
