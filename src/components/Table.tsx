@@ -12,6 +12,7 @@ interface TableDats {
   BN: string;
   BC: string;
   BRN: string;
+  Email: string;
 }
 
 interface TaDatPerson {
@@ -25,9 +26,10 @@ const Table = ({ people, botCenter }: TaDatPerson) => {
       <table className="min-w-full bg-white rounded-2xl shadow-lg overflow-hidden">
         <thead className=" bg-[#F9FAFB]">
           <tr className="border-b-[1px] text-center">
-            <th className="px-6 py-3">姓名</th>
-            <th className="w-56 px-6 py-3">單位</th>
+            <th className="w-24 px-6 py-3">姓名</th>
+            <th className="w-48 px-6 py-3">單位</th>
             <th className="px-6 py-3">職稱</th>
+            <th className="px-6 py-3">Eamil</th>
             <th className="px-6 py-3">身分證字號</th>
             <th className="px-6 py-3">銀行名稱</th>
             <th className="px-6 py-3">銀行代碼</th>
@@ -49,6 +51,12 @@ const Table = ({ people, botCenter }: TaDatPerson) => {
                     <CopyBtn text={pve.Unit ?? ""} botCenter={botCenter} />
                   </td>
                   <td className="px-6 py-4">{pve.JT}</td>
+                  <td className="px-6 py-4 space-y-1">
+                    <p>{pve.Email}</p>
+                    {pve.Email !== "" && (
+                      <CopyBtn text={pve.Email ?? ""} botCenter={botCenter} />
+                    )}
+                  </td>
                   <td className="px-6 py-4 space-y-1">
                     <p>{pve.IN}</p>
                     <CopyBtn text={pve.IN ?? ""} botCenter={botCenter} />
