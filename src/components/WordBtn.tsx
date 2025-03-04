@@ -11,6 +11,7 @@ interface BtnDats {
   BN: string;
   BC: string;
   BRN: string;
+  Email: string;
 }
 
 interface BtnPerson {
