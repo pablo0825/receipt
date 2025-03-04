@@ -15,6 +15,7 @@ interface peopleDats {
   BN: string;
   BC: string;
   BRN: string;
+  Email: string;
 }
 
 function App() {
