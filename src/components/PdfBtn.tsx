@@ -73,7 +73,7 @@ const PdfBtn = ({ idx, people }: PdfBtnPerson) => {
       /* unit */
       const unitLines_unit = wrapText(peopleData.Unit, 11);
 
-      if (unitLines_unit.length < 11) {
+      if (peopleData.Unit.length > 11) {
         unitLines_unit.forEach((line, index) => {
           page.drawText(line, {
             x: 248,
@@ -129,7 +129,7 @@ const PdfBtn = ({ idx, people }: PdfBtnPerson) => {
       /* 銀行名稱 */
       const unitLines_BN = wrapText(peopleData.BN, 5);
 
-      if (unitLines_BN.length < 5) {
+      if (peopleData.BN.length > 5) {
         unitLines_BN.forEach((line, index) => {
           page.drawText(line, {
             x: 172,
